@@ -14,6 +14,7 @@ exports.createGame = async (req, res) => {
 }
 
 exports.createComment = async (req, res) => {
+    // console.log('why here? why god, why me?')
     try {
         const comment = {
             user: req.body.user,
@@ -21,6 +22,7 @@ exports.createComment = async (req, res) => {
             rating: req.body.rating,
             date: req.body.date
         };
+        // console.log('steve')
         await Game.findOneAndUpdate({
             _id: req.body.gameid
         }, {
@@ -29,13 +31,8 @@ exports.createComment = async (req, res) => {
             }
         }, {
             new: true
-        }, (err, result) => {
-            if (err) res.status(500).send(err);
-            res.status(200).send({
-                game: result,
-                message: 'Comment submitted'
-            })
         });
+        res.status(200).send({message: 'comment submitted'})
     } catch (err) {
         res.status(500).send(err)
     }
